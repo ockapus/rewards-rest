@@ -38,7 +38,9 @@ Returns current point totals for that user, broken down by payer.
 #### Responses
 
 `status 200` - *application/json* Returns totals of all available points
+
 **Example:**
+
     {
         "points": {
             "DANNON": 1000,
@@ -59,6 +61,7 @@ Provides end points for modifying the point log for a specified users
 Adds points to a user account for a specific payer and date. Point value can be negative, as long as total points for that specific payer at specified date would not be less than zero. Date cannot be in the future.
 
 #### Request Parameters
+
 Parameter | Type | Description
 --- | --- | ---
 payer | string | Name of the specified payer
@@ -66,6 +69,7 @@ points | integer | Points to add or subtract from this user
 timestamp | string | ISO Format date/time for this request
 
 **Example:**
+
     {
         "payer": "DANNON",
         "points": 300,
@@ -75,5 +79,7 @@ timestamp | string | ISO Format date/time for this request
 #### Responses
 
 `status 200` - *application/json* Returns `{"success": true}` if valid request
+
 `status 400` - Returned if request malformed or invalid
+
 `status 404` - Returned if user ID not found
