@@ -95,7 +95,7 @@ class points:
         Request Body:
         JSON string expected in the form of:
             {
-                'points': int
+                'deduct': int
             }
 
         Returns:
@@ -112,18 +112,18 @@ class points:
 
         # Validate our payload before attempting to process
         post_data = json.loads(web.data())
-        if 'points' not in post_data:
-            raise web.BadRequest(message="Required field 'points' not found in request body.")
-        if not isinstance(post_data['points'], int):
-            raise web.BadRequest(message="Field 'points' must be an integer.")
-        if post_data['points'] < 0:
-            raise web.BadRequest(message="Field 'points' must be positive value.")
+        if 'deduct' not in post_data:
+            raise web.BadRequest(message="Required field 'deduct' not found in request body.")
+        if not isinstance(post_data['deduct'], int):
+            raise web.BadRequest(message="Field 'deduct' must be an integer.")
+        if post_data['deduct'] < 0:
+            raise web.BadRequest(message="Field 'deduct' must be positive value.")
 
         # Now validate to make certain we're not going to end up with any negative points
         total = 0
         for entry in users[user]:
             total += entry[2]
-        if post_data['points'] > total:
+        if post_data['deduct'] > total:
             raise web.BadRequest(message="Not enough total points for requested deduction.")
 
         # To figure out age of points, go through our log for this user and collapse previous spends.
@@ -160,7 +160,7 @@ class points:
 
         # Go through processed sorted log, and figure out how many points to remove from each payer        
         deductions = {}
-        remaining_deduction = post_data['points']
+        remaining_deduction = post_data['deduct']
         for l in sorted_log:
             if l[0] not in deductions:
                 deductions[l[0]] = 0

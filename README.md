@@ -18,7 +18,7 @@ Once Python is installed properly, navigate to the directory that you installed 
 This will start a very simple web server on the local host, using port 8080. Available resources are documented below, and can be visited using standard REST methodology (for instance: curl commands, or a utility like Postman). Service can be valided as up by visiting the following url in any standard browser:
 
     http://localhost:8080/rest/users/1
-    
+
 
 ## Resources
 
@@ -96,11 +96,11 @@ Deducts points from the user account, such that oldest points are spent first, a
 
 Parameter | Type | Description
 --- | --- | ---
-points | integer | Points to deduct from this user account. Must be positive.
+deduct | integer | Points to deduct from this user account. Must be positive.
 
 **Example:**
 
-    { "points": 5000 }
+    { "deduct": 5000 }
 
 ##### Responses
 
