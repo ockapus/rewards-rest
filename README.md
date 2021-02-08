@@ -31,11 +31,11 @@ id | integer | The ID value of the user effected by the request
 
 Provides information about users in the system. For demonstration purposes, only a single user (ID: 1) is available.
 
-* Get Current Points -> `GET`: `/rest/users/{id}`
+#### Get Current Points -> `GET`: `/rest/users/{id}`
 
 Returns current point totals for that user, broken down by payer.
 
-#### Responses
+##### Responses
 
 `status 200` - *application/json* - Returns totals of all available points
 
@@ -56,11 +56,11 @@ Returns current point totals for that user, broken down by payer.
 
 Provides end points for modifying the point log for a specified users
 
-* Add Points -> `POST`: `/rest/points/{id}`
+#### Add Points -> `POST`: `/rest/points/{id}`
 
 Adds points to a user account for a specific payer and date. Point value can be negative, as long as total points for that specific payer at specified date would not be less than zero. Date cannot be in the future.
 
-#### Request Parameters
+##### Request Parameters
 
 Parameter | Type | Description
 --- | --- | ---
@@ -76,7 +76,7 @@ timestamp | string | ISO Format date/time for this request
         "timestamp": "2020-10-31 10:00:00"
     }
 
-#### Responses
+##### Responses
 
 `status 200` - *application/json* - Returns `{"success": true}` if valid request
 
@@ -85,11 +85,11 @@ timestamp | string | ISO Format date/time for this request
 `status 404` - Returned if user ID not found
 
 
-* Deduct Points -> `PUT`: `/rest/points/{id}`
+#### Deduct Points -> `PUT`: `/rest/points/{id}`
 
 Deducts points from the user account, such that oldest points are spent first, and no payer's balance go negative.
 
-#### Request Parameters
+##### Request Parameters
 
 Parameter | Type | Description
 --- | --- | ---
@@ -99,7 +99,7 @@ points | integer | Points to deduct from this user account. Must be positive.
 
     { "points": 5000 }
 
-#### Responses
+##### Responses
 
 `status 200` - *application/json* - Point values deducted by payer, and time deducted (always now)
 
