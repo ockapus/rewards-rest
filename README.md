@@ -15,7 +15,10 @@ Once Python is installed properly, navigate to the directory that you installed 
 
     python service.py
 
-This will start a very simple web server on the local host, using port 8080. Available resources are documented below, and can be visited using standard REST methodology (for instance: curl commands, or a utility like Postman).
+This will start a very simple web server on the local host, using port 8080. Available resources are documented below, and can be visited using standard REST methodology (for instance: curl commands, or a utility like Postman). Service can be valided as up by visiting the following url in any standard browser:
+
+    http://localhost:8080/rest/users/1
+    
 
 ## Resources
 
@@ -58,7 +61,7 @@ Provides end points for modifying the point log for a specified users
 
 #### Add Points -> `POST`: `/rest/points/{id}`
 
-Adds points to a user account for a specific payer and date. Point value can be negative, as long as total points for that specific payer at specified date would not be less than zero. Date cannot be in the future.
+Adds points to a user account for a specific payer and date. Point value can be negative, as long as total points for that specific payer at specified date would not be less than zero. Date cannot be in the future. 
 
 ##### Request Parameters
 
