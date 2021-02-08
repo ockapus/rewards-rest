@@ -37,7 +37,7 @@ Returns current point totals for that user, broken down by payer.
 
 #### Responses
 
-`status 200` - *application/json* Returns totals of all available points
+`status 200` - *application/json* - Returns totals of all available points
 
 **Example:**
 
@@ -78,8 +78,41 @@ timestamp | string | ISO Format date/time for this request
 
 #### Responses
 
-`status 200` - *application/json* Returns `{"success": true}` if valid request
+`status 200` - *application/json* - Returns `{"success": true}` if valid request
 
-`status 400` - Returned if request malformed or invalid
+`status 400` - Returned if request malformed or invalid for some reason
+
+`status 404` - Returned if user ID not found
+
+
+* Deduct Points -> `PUT`: `/rest/points/{id}`
+
+Deducts points from the user account, such that oldest points are spent first, and no payer's balance go negative.
+
+#### Request Parameters
+
+Parameter | Type | Description
+--- | --- | ---
+points | integer | Points to deduct from this user account. Must be positive.
+
+**Example:**
+
+    { "points": 5000 }
+
+#### Responses
+
+`status 200` - *application/json* - Point values deducted by payer, and time deducted (always now)
+
+**Example:**
+
+    {
+        "results": [
+            {"payer": "DANNON", "points": -100, "timestamp": "2021-02-07 16:59:12"}, 
+            {"payer": "UNILEVER", "points": -200, "timestamp": "2021-02-07 16:59:12"}, 
+            {"payer": "MILLER COORS", "points": -4700, "timestamp": "2021-02-07 16:59:12"}
+        ]
+    }
+
+`status 400` - Returned if request malformed or invalid for some reason
 
 `status 404` - Returned if user ID not found
